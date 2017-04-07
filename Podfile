@@ -8,4 +8,5 @@ target 'Drop' do
   # Pods for Drop
 pod 'Firebase'
 pod 'FirebaseAuth'
+pod ‘Firebase/Database’
 end

@@ -8,10 +8,14 @@
 
 import UIKit
 import Firebase
+import FirebaseAnalytics
+import FirebaseDatabase
 
-//UIPickerViewDataSource, UIPickerViewDelegate
 
 class RegisterViewController: UIViewController {
+    
+    var ref: FIRDatabaseReference!
+    
 
     @IBOutlet weak var nameTextField: UIDesignableTextField!
     @IBOutlet weak var emailTextField: UIDesignableTextField!
@@ -32,6 +36,8 @@ class RegisterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         print("Register screen loaded")
+        
+        ref = FIRDatabase.database().reference()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,7 +94,6 @@ class RegisterViewController: UIViewController {
     //Function for creating an account
     //FireBase does all of the heavy lifting and errors are automatically generated
     
-    //TODOs 
     
     @IBAction func createAcount(_ sender: Any) {
          if emailTextField.text == "" || passwordTextField.text == ""
@@ -101,22 +106,67 @@ class RegisterViewController: UIViewController {
             self.present(alertController, animated: true, completion: nil)
             
          }
+        
+        let userEmail: String = self.emailTextField.text!
+        let userPassword: String = self.passwordTextField.text!
+        let userName: String = self.nameTextField.text!
+        
+        if userName == "" && self.accountType == "" {
+            let alertController = UIAlertController(title: "Oops!", message: "Please give your name and choose and account type.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+            
+        else if userName == "" {
+            let alertController = UIAlertController(title: "Oops!", message: "Please give your name.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+            
+        else if self.accountType == "" {
+            let alertController = UIAlertController(title: "Oops!", message: "Please choose an account Type.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+            
+            
         else
          {
             FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user, error)  in
                 if error == nil {
                 
-                    let alertController = UIAlertController(title: "Yay! Account Created!", message: "Please log in.", preferredStyle: .alert)
-                    
-                    let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                    
                     //TODO
                     // Figure out how to log in from here. Probably after hitting "Loging" on the alert it logs you in automatically
                     
-                }
+                    
+                    // successful account creation after all of the fields are filled in properly
+                    
+                    let userID: String = user!.uid
+                        
+                    self.ref.child("users").child(userID).setValue(["_email": userEmail, "_name": userName, "_password": userPassword, "_usertype": self.accountType])
+                        
+                    let alertController = UIAlertController(title: "Yay! Account Created!", message: "Please log in.", preferredStyle: .alert)
+                        
+                    let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                        
+                    self.present(alertController, animated: true, completion: nil)
+                        
+                    
+                    //Push into to database
+                        
+                    
+                    }
+                    
                 else {
                     let alertController = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
                 
