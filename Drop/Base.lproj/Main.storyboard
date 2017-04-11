@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Drop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logIn" id="BYZ-38-t0r" customClass="ViewController" customModule="Drop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -146,7 +146,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Zup-oL-bq6" id="SCX-bE-Hoh"/>
-                        <outlet property="logoutButton" destination="gdy-gk-kHK" id="Hwg-9w-mBa"/>
+                        <outlet property="logoutButton" destination="6NI-Sh-WRR" id="Rsa-6m-nLM"/>
                         <outlet property="passwordTextField" destination="LMj-fE-sjP" id="NWT-aG-LOF"/>
                         <outlet property="usernameLabel" destination="gdy-gk-kHK" id="rMV-dy-gdf"/>
                     </connections>
@@ -358,6 +358,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rx9-CP-omo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1241" y="-663"/>
+        </scene>
+        <!--Post Login View Controller-->
+        <scene sceneID="ABd-aP-aP3">
+            <objects>
+                <viewController storyboardIdentifier="loggedIn" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zqB-LW-HsQ" customClass="PostLoginViewController" customModule="Drop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hyU-Pg-m6s"/>
+                        <viewControllerLayoutGuide type="bottom" id="wnF-nS-x7S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XbX-z0-TEZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-8h-FIy">
+                                <rect key="frame" x="52" y="37" width="287" height="193"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Niggs you logged in!!!THis is where the reports are supposed to go. Bob is still gay.                                               Yili, Kiara: This is the view where we start displaying reports and what not</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oNo-Kl-vYW">
+                                <rect key="frame" x="164" y="511" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="zqB-LW-HsQ" eventType="touchUpInside" id="zIi-Ht-zAU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The logout button works, but it needs to be made to look better like it does in the android app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prM-jt-EsJ">
+                                <rect key="frame" x="52" y="282" width="287" height="135"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPe-Q5-Dgl">
+                                <rect key="frame" x="64" y="573" width="246" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="userNameLabel" destination="mPe-Q5-Dgl" id="8cH-02-eel"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kld-Dj-tCv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="218"/>
         </scene>
     </scenes>
     <resources>

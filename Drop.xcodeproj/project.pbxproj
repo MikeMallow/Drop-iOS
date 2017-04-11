@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		71C1C962E778ADB8AC5140B6 /* Pods_Drop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12B6D07104FA2BA19A6CAFD /* Pods_Drop.framework */; };
+		B133B3C71E9CA93B002707B9 /* PostLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B133B3C61E9CA93B002707B9 /* PostLoginViewController.swift */; };
 		B142479D1E75CA4D0099A986 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B142479C1E75CA4D0099A986 /* GoogleService-Info.plist */; };
 		B14AFDD71E6A5C4B00DEA35A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AFDD61E6A5C4B00DEA35A /* RegisterViewController.swift */; };
 		B14AFDDA1E6A61FD00DEA35A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B14AFDD81E6A61FD00DEA35A /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B133B3C61E9CA93B002707B9 /* PostLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLoginViewController.swift; sourceTree = "<group>"; };
 		B142479C1E75CA4D0099A986 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B14AFDD61E6A5C4B00DEA35A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B14AFDD91E6A61FD00DEA35A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				B19F7F6A1E518B6300FB44E0 /* ViewController.swift */,
 				B14AFDD61E6A5C4B00DEA35A /* RegisterViewController.swift */,
 				B14AFDD81E6A61FD00DEA35A /* Main.storyboard */,
+				B133B3C61E9CA93B002707B9 /* PostLoginViewController.swift */,
 				B19F7F6F1E518B6300FB44E0 /* Assets.xcassets */,
 				B19F7F711E518B6300FB44E0 /* LaunchScreen.storyboard */,
 				B19F7F741E518B6300FB44E0 /* Info.plist */,
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B133B3C71E9CA93B002707B9 /* PostLoginViewController.swift in Sources */,
 				B19F7F7B1E519C3500FB44E0 /* RoundButton.swift in Sources */,
 				B14AFDD71E6A5C4B00DEA35A /* RegisterViewController.swift in Sources */,
 				B19F7F6B1E518B6300FB44E0 /* ViewController.swift in Sources */,

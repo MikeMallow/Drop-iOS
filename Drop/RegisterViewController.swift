@@ -159,10 +159,16 @@ class RegisterViewController: UIViewController {
                     let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: nil)
                     alertController.addAction(defaultAction)
                         
-                    self.present(alertController, animated: true, completion: nil)
+                    self.present(alertController, animated: true, completion: {
                         
+                        //Why does this not redirect to the post login screen either?!?!?!?!?!?!?!??!?!?!?!?!?!?!?!??! ask B-rizzle
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+                        self.present(postLoginViewController, animated: true, completion: nil)
+                    })
                     
-                    //Push into to database
+                    
+
                         
                     
                     }

@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailTextField: UIDesignableTextField!
     @IBOutlet weak var passwordTextField: UIDesignableTextField!
-    @IBOutlet weak var logoutButton: UILabel!
+    @IBOutlet weak var logoutButton: UIButton!
+    
     
     
     // Prevent AutoRotation to landscape by overriding two variables - Mike M
@@ -36,6 +37,14 @@ class ViewController: UIViewController {
             print("user logged in")
             self.logoutButton.alpha = 1.0
             self.usernameLabel.text = user.email
+            
+            // Got to ask B-Rizzle why this doens't work
+            // it should immediately go to the loggedIN view is a user is already signed in, but it doesn't
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+            self.present(postLoginViewController, animated: true, completion: nil)
+            
+            
         } else {
             print("no user logged in")
             self.logoutButton.alpha = 0.0
@@ -68,6 +77,10 @@ class ViewController: UIViewController {
                     self.usernameLabel.text = user!.email
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+                    self.present(postLoginViewController, animated: true, completion: nil)
                 }
                 else
                 {
