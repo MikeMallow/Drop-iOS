@@ -119,6 +119,65 @@ class ViewController: UIViewController {
         self.passwordTextField.text = ""
     }
 
+    @IBAction func forgotPassword(_ sender: Any) {
+        
+        if self.emailTextField.text == ""
+        {
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter your email address.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(defaultAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else
+        {
+            FIRAuth.auth()?.sendPasswordReset(withEmail: self.emailTextField.text!, completion: { (error) in
+                
+                var title = ""
+                var message = ""
+                
+                if error != nil {
+                    title = "Oops!"
+                    message = (error?.localizedDescription)!
+                }
+                
+                else {
+                    title = "Success"
+                    message = "Password reset email sent"
+                    self.emailTextField.text = ""
+                }
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            })
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
