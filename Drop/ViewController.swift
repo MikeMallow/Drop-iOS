@@ -40,9 +40,12 @@ class ViewController: UIViewController {
             
             // Got to ask B-Rizzle why this doens't work
             // it should immediately go to the loggedIN view is a user is already signed in, but it doesn't
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
-            self.present(postLoginViewController, animated: true, completion: nil)
+            // Fixed it by moving it to viewDidAppear (below)
+            
+            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+//            self.present(postLoginViewController, animated: true, completion: nil)
             
             
         } else {
@@ -51,6 +54,15 @@ class ViewController: UIViewController {
             self.usernameLabel.text = ""
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (FIRAuth.auth()?.currentUser) != nil {
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+            self.present(postLoginViewController, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {

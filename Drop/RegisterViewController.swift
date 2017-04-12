@@ -156,22 +156,17 @@ class RegisterViewController: UIViewController {
                         
                     let alertController = UIAlertController(title: "Yay! Account Created!", message: "Please log in.", preferredStyle: .alert)
                         
-                    let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
+                    let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: { alert in
                         
-                    self.present(alertController, animated: true, completion: {
-                        
-                        //Why does this not redirect to the post login screen either?!?!?!?!?!?!?!??!?!?!?!?!?!?!?!??! ask B-rizzle
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
                         self.present(postLoginViewController, animated: true, completion: nil)
                     })
                     
-                    
-
+                    alertController.addAction(defaultAction)
                         
-                    
-                    }
+                    self.present(alertController, animated: true, completion: nil )}
+
                     
                 else {
                     let alertController = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
