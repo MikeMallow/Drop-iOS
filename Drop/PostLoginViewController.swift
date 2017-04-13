@@ -15,11 +15,15 @@ class PostLoginViewController: UIViewController {
 
     @IBOutlet weak var userNameLabel: UILabel!
     
+    var name:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = FIRAuth.auth()!.currentUser
+        //let user = FIRAuth.auth()!.currentUser
         print("user logged in")
-        self.userNameLabel.text = user!.email
+//        self.userNameLabel.text = user!.email
+        
+        self.userNameLabel.text = name
 
         // Do any additional setup after loading the view.
     }
@@ -44,6 +48,8 @@ class PostLoginViewController: UIViewController {
         
         print("logout pushed")
         try! FIRAuth.auth()?.signOut()
+        
+        //self.navigationController?.tabBarController?.navigationController?.popViewController(animated: true)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let logIn = storyboard.instantiateViewController(withIdentifier: "logIn")

@@ -94,6 +94,9 @@ class RegisterViewController: UIViewController {
     //Function for creating an account
     //FireBase does all of the heavy lifting and errors are automatically generated
     
+    @IBAction func alreadyMemberButtonPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func createAcount(_ sender: Any) {
          if emailTextField.text == "" || passwordTextField.text == ""
@@ -158,9 +161,11 @@ class RegisterViewController: UIViewController {
                         
                     let defaultAction = UIAlertAction(title: "Login", style: .cancel, handler: { alert in
                         
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
-                        self.present(postLoginViewController, animated: true, completion: nil)
+                        self.performSegue(withIdentifier: "loginSegue", sender: self)
+                        
+//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                        let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+//                        self.present(postLoginViewController, animated: true, completion: nil)
                     })
                     
                     alertController.addAction(defaultAction)
@@ -179,6 +184,15 @@ class RegisterViewController: UIViewController {
                 
                 }
             })
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //SEGUE
+        //you can pass variables from this controller to the next here
+        if (segue.identifier == "loginSegue") {
+            //            let destination = segue.destination
+            //You cannot modify UI IBOutlets here, it will get overriden by loadView()
+            //            destination.name = "Bob Waters"
         }
     }
 

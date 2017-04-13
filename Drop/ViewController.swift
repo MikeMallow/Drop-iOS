@@ -11,10 +11,10 @@ import Firebase
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var usernameLabel: UILabel!
+    //@IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailTextField: UIDesignableTextField!
     @IBOutlet weak var passwordTextField: UIDesignableTextField!
-    @IBOutlet weak var logoutButton: UIButton!
+    
     
     
     
@@ -33,10 +33,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         print("correct view loaded")
         super.viewDidLoad()
-        if let user = FIRAuth.auth()?.currentUser {
+        if (FIRAuth.auth()?.currentUser) != nil {
             print("user logged in")
-            self.logoutButton.alpha = 1.0
-            self.usernameLabel.text = user.email
             
             // Got to ask B-Rizzle why this doens't work
             // it should immediately go to the loggedIN view is a user is already signed in, but it doesn't
@@ -50,18 +48,17 @@ class ViewController: UIViewController {
             
         } else {
             print("no user logged in")
-            self.logoutButton.alpha = 0.0
-            self.usernameLabel.text = ""
         }
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if (FIRAuth.auth()?.currentUser) != nil {
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
 
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
-            self.present(postLoginViewController, animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+//            self.present(postLoginViewController, animated: true, completion: nil)
         }
     }
 
@@ -85,14 +82,13 @@ class ViewController: UIViewController {
                 
                 if error == nil
                 {
-                    self.logoutButton.alpha = 1.0
-                    self.usernameLabel.text = user!.email
+                    
                     self.emailTextField.text = ""
                     self.passwordTextField.text = ""
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
-                    self.present(postLoginViewController, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let postLoginViewController = storyboard.instantiateViewController(withIdentifier: "loggedIn")
+//                    self.present(postLoginViewController, animated: true, completion: nil)
                 }
                 else
                 {
@@ -113,8 +109,6 @@ class ViewController: UIViewController {
     {
         print("logout pushed")
         try! FIRAuth.auth()?.signOut()
-        self.logoutButton.alpha = 0.0
-        self.usernameLabel.text = ""
         self.emailTextField.text = ""
         self.passwordTextField.text = ""
     }
@@ -155,6 +149,16 @@ class ViewController: UIViewController {
                 
                 self.present(alertController, animated: true, completion: nil)
             })
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //SEGUE
+        //you can pass variables from this controller to the next here
+        if (segue.identifier == "loginSegue") {
+//            let destination = segue.destination
+            //You cannot modify UI IBOutlets here, it will get overriden by loadView()
+//            destination.name = "Bob Waters"
         }
     }
 }
