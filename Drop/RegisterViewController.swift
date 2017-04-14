@@ -48,7 +48,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func userButtonSelect(_ sender: Any) {
         
-        accountType = "user"
+        accountType = "User"
         userButton.backgroundColor = UIColor.gray
         
         workerButton.backgroundColor = nil
@@ -60,7 +60,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func workerButtonSelect(_ sender: Any) {
         
-        accountType = "worker"
+        accountType = "Worker"
         workerButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func managerButtonSelect(_ sender: Any) {
         
-        accountType = "manager"
+        accountType = "Manager"
         managerButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
@@ -82,7 +82,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func adminButtonSelect(_ sender: Any) {
         
-        accountType = "admin"
+        accountType = "Admin"
         adminButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
@@ -155,7 +155,7 @@ class RegisterViewController: UIViewController {
                     
                     let userID: String = user!.uid
                         
-                    self.ref.child("users").child(userID).setValue(["_email": userEmail, "_name": userName, "_password": userPassword, "_usertype": self.accountType])
+                    self.ref.child("users").child(userID).setValue(["_email": userEmail, "_name": userName, "_password": userPassword, "_userType": self.accountType])
                         
                     let alertController = UIAlertController(title: "Yay! Account Created!", message: "Please log in.", preferredStyle: .alert)
                         

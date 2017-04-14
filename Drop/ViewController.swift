@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         
         if self.emailTextField.text == ""
         {
-            let alertController = UIAlertController(title: "Oops!", message: "Please enter your email address.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter your email address so that we can send instructions to select a new password.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alertController.addAction(defaultAction)
