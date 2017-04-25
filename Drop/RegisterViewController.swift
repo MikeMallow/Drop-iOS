@@ -95,6 +95,7 @@ class RegisterViewController: UIViewController {
     //FireBase does all of the heavy lifting and errors are automatically generated
     
     @IBAction func alreadyMemberButtonPressed(_ sender: Any) {
+        print("hi mike")
         self.navigationController?.popViewController(animated: true)
     }
     

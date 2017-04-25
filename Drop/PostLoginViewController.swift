@@ -30,7 +30,11 @@ class PostLoginViewController: UIViewController {
     var userEmail:String!
     var userName: String!
     var accountType: String!
+    var accountTypeChange: String!
     var ref: FIRDatabaseReference!
+    var userID: String!
+    var changeTypeBool = false
+    
     
     
     
@@ -45,13 +49,16 @@ class PostLoginViewController: UIViewController {
 //        self.userNameLabel.text = user!.email
         
         
-        let userID: String = user!.uid
+        self.userID = user!.uid
         
         self.ref.child("users").child(userID).observe(.value, with: { (snapshot) -> Void in
             print(snapshot.value as! NSDictionary)
             
             self.userName = (snapshot.value as! NSDictionary)["_name"] as! String
             self.accountType = (snapshot.value as! NSDictionary)["_userType"] as! String
+            if !self.changeTypeBool {
+                self.accountTypeChange = self.accountType
+            }
         
             print(self.userName)
             print(self.accountType)
@@ -59,16 +66,19 @@ class PostLoginViewController: UIViewController {
             // Needed to stick this here because firebase response too slow, so this code will excuted before firebase returns the user details
             self.userNameField.attributedPlaceholder = NSAttributedString(string: "name:  " + self.userName!, attributes: [NSForegroundColorAttributeName: UIColor.white])
 
-            
-            if self.accountType == "User" {
-                self.userButton.backgroundColor = UIColor.gray
-            } else if self.accountType == "Worker" {
-                self.userButton.backgroundColor = UIColor.gray
-            } else if self.accountType == "Manager" {
-                self.userButton.backgroundColor = UIColor.gray
-            } else {
-                self.adminButton.backgroundColor = UIColor.gray
-                }
+            if !self.changeTypeBool {
+                if self.accountType == "user" {
+                    self.userButton.backgroundColor = UIColor.gray
+                    print("test2")
+                } else if self.accountType == "worker" {
+                    self.workerButton.backgroundColor = UIColor.gray
+                } else if self.accountType == "manager" {
+                    self.managerButton.backgroundColor = UIColor.gray
+                } else {
+                    self.adminButton.backgroundColor = UIColor.gray
+                    print("mike is gay")
+                    }
+            }
             })
         
         print(self.userName)
@@ -104,14 +114,55 @@ class PostLoginViewController: UIViewController {
         //TODO
         //Update user info here
         //This should be fun, but it's 3:30 in the morning so I'll finish it later
+        
+        let prntRef  = FIRDatabase.database().reference().child("users").child(self.userID)
+        
+        if self.userNameField.text != "" {
+            prntRef.updateChildValues(["_name": userNameField.text!])
+            self.userNameField.text = ""
+            self.userNameField.attributedPlaceholder = NSAttributedString(string: "name:  " + self.userName!, attributes: [NSForegroundColorAttributeName: UIColor.white])
+            
+            }
+        
+        if self.accountTypeChange != self.accountType {
+            prntRef.updateChildValues(["_userType": self.accountTypeChange])
+            self.accountType = self.accountTypeChange
+            if self.accountTypeChange == "user" {
+                userButton.backgroundColor = UIColor.darkGray
+            }
+            if self.accountTypeChange == "worker" {
+                workerButton.backgroundColor = UIColor.darkGray
+            }
+            if self.accountTypeChange == "manager" {
+                managerButton.backgroundColor = UIColor.darkGray
+            }
+            if self.accountTypeChange == "admin" {
+                adminButton.backgroundColor = UIColor.darkGray
+            }
+            
+        }
+        
+        if self.userEmailField.text != "" {
+            
+        }
+            
+        
+        
+//        if self.userNameField.text != "" {
+//            let prntRef  = FIRDatabase.database().reference().child("users").child(self.userID)
+//            prntRef.updateChildValues(["_name": userNameField.text!])
+//        
+//        }
+        
     }
 
     
     @IBAction func userButtonSelect(_ sender: Any) {
         
-        print("hi")
-        accountType = "user"
+        self.accountTypeChange = "user"
+        changeTypeBool = true
         userButton.backgroundColor = UIColor.gray
+        print("test 1")
         
         workerButton.backgroundColor = nil
         managerButton.backgroundColor = nil
@@ -121,7 +172,8 @@ class PostLoginViewController: UIViewController {
     
     @IBAction func workerButtonSelect(_ sender: Any) {
         
-        accountType = "worker"
+        self.accountTypeChange = "worker"
+        changeTypeBool = true
         workerButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
@@ -132,7 +184,8 @@ class PostLoginViewController: UIViewController {
     
     @IBAction func managerButtonSelect(_ sender: Any) {
         
-        accountType = "manager"
+        self.accountTypeChange = "manager"
+        changeTypeBool = true
         managerButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
@@ -143,7 +196,8 @@ class PostLoginViewController: UIViewController {
     
     @IBAction func adminButtonSelect(_ sender: Any) {
         
-        accountType = "admin"
+        self.accountTypeChange = "admin"
+        changeTypeBool = true
         adminButton.backgroundColor = UIColor.gray
         
         userButton.backgroundColor = nil
